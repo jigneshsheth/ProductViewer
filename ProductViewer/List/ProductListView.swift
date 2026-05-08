@@ -10,7 +10,12 @@ import SwiftUI
 	/// List of Products screen
 struct ProductListView: View {
 	@StateObject
-	private var productViewModel = ProductViewModelImpl(productService: ProductServiceImpl())
+	private var productViewModel = ProductViewModelImpl(
+		productRepository: ProductRepositoryImpl(
+			remoteService: ProductServiceImpl(),
+			localStore: ProductJSONLocalStore()
+		)
+	)
 	
 	@State private var presentAlert = false
 	@State private var alertTitle = String.emptyString
@@ -28,7 +33,7 @@ struct ProductListView: View {
 					.navigationTitle(String.deals)
 					.navigationBarTitleDisplayMode(.inline)
 					.refreshable {
-						await self.loadProductData()
+						await self.refreshProductData()
 					}
 				}
 			}.task {
@@ -49,11 +54,17 @@ struct ProductListView: View {
 	
 		/// Loading Product data
 	private func loadProductData() async {
-		do {
-			try await self.productViewModel.loadProducts()
+		await self.productViewModel.loadProducts()
+		if let errorMessage = productViewModel.lastErrorMessage {
+			alertTitle = errorMessage
+			presentAlert = true
 		}
-		catch {
-			alertTitle = error.localizedDescription
+	}
+	
+	private func refreshProductData() async {
+		await self.productViewModel.refreshProducts()
+		if let errorMessage = productViewModel.lastErrorMessage {
+			alertTitle = errorMessage
 			presentAlert = true
 		}
 	}

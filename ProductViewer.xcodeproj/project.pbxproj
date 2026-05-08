@@ -31,7 +31,6 @@
 		19EF2E2527A294C2003B0A34 /* ProductServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF2E2427A294C2003B0A34 /* ProductServiceTests.swift */; };
 		19EF2E2F27A294C2003B0A34 /* ProductViewerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF2E2E27A294C2003B0A34 /* ProductViewerUITests.swift */; };
 		19EF2E3127A294C2003B0A34 /* ProductViewerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF2E3027A294C2003B0A34 /* ProductViewerUITestsLaunchTests.swift */; };
-		A84F8EF82FA9A14D002F1E64 /* README 2.md in Resources */ = {isa = PBXBuildFile; fileRef = A84F8EF72FA9A14D002F1E64 /* README 2.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +78,6 @@
 		19EF2E2A27A294C2003B0A34 /* ProductViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProductViewerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19EF2E2E27A294C2003B0A34 /* ProductViewerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewerUITests.swift; sourceTree = "<group>"; };
 		19EF2E3027A294C2003B0A34 /* ProductViewerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewerUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		A84F8EF72FA9A14D002F1E64 /* README 2.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "README 2.md"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +186,6 @@
 				19EF2E2327A294C2003B0A34 /* ProductViewerTests */,
 				19EF2E2D27A294C2003B0A34 /* ProductViewerUITests */,
 				19EF2E1127A294BE003B0A34 /* Products */,
-				A84F8EF72FA9A14D002F1E64 /* README 2.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -365,7 +362,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A84F8EF82FA9A14D002F1E64 /* README 2.md in Resources */,
 				19EF2E1827A294C1003B0A34 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

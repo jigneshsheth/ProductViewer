@@ -7,7 +7,7 @@
 
 import Foundation
 // MARK: - Price
-struct Price: Codable {
+struct Price: Codable, Equatable {
     let amountInCents: Int
     let currencySymbol: CurrencySymbol
     let displayString: String
