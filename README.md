@@ -43,19 +43,19 @@ Data flow:
 
 ```mermaid
 flowchart TD
-    A[UIView / SwiftUI View\nProductListView, ProductDetailView]
-    B[ViewModel Layer\nProductViewModel(protocol)\nProductViewModelImpl]
-    C[Service / Network Layer\nProductService]
-    D[Remote API\nProducts Endpoint]
-    E[Model Layer\nProduct]
+    A["UIView / SwiftUI View<br/>ProductListView, ProductDetailView"]
+    B["ViewModel Layer<br/>ProductViewModel (protocol)<br/>ProductViewModelImpl"]
+    C["Service / Network Layer<br/>ProductService"]
+    D["Remote API<br/>Products Endpoint"]
+    E["Model Layer<br/>Product"]
 
-    A -->|User actions\n(onAppear, refresh, tap)| B
-    B -->|Requests data\nfetchProducts()| C
+    A -->|"User actions<br/>(onAppear, refresh, tap)"| B
+    B -->|"Requests data<br/>fetchProducts()"| C
     C -->|HTTP request| D
     D -->|JSON response| C
     C -->|Decode response| E
     E -->|Mapped products| B
-    B -->|Published state update\nloading / success / error| A
+    B -->|"Published state update<br/>loading / success / error"| A
 ```
 
 - `UIView/SwiftUI View` sends user intents to the `ViewModel`.
