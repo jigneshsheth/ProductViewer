@@ -44,7 +44,7 @@ Data flow:
 ```mermaid
 flowchart TD
     A[UIView / SwiftUI View\nProductListView, ProductDetailView]
-    B[ViewModel Layer\nProductViewModel (protocol)\nProductViewModelImpl]
+    B[ViewModel Layer\nProductViewModel(protocol)\nProductViewModelImpl]
     C[Service / Network Layer\nProductService]
     D[Remote API\nProducts Endpoint]
     E[Model Layer\nProduct]
