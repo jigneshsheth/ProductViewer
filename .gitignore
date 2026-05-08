@@ -1,0 +1,33 @@
+# macOS
+.DS_Store
+
+# Xcode user-specific data
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+
+# Xcode build artifacts
+build/
+DerivedData/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Package.resolved
+
+# Fastlane artifacts
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# Archives and symbols
+*.ipa
+*.dSYM.zip
+*.dSYM
