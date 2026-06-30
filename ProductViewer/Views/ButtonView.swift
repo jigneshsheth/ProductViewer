@@ -9,13 +9,14 @@ import SwiftUI
 
 /// Customized Button for the `Add To Cart` & ` Add to List`
 struct ButtonView: View {
-
+    
     let title: String
     let backgroundColor: Color
     let foregroundColor: Color
     let action: (() -> Void)
+    
     @State private var isAnimated = false
-
+    
     var body: some View {
         Button(action: action) {
             Text(title)
@@ -34,29 +35,20 @@ struct ButtonView: View {
         .accessibilityIdentifier(title)
         .buttonStyle(.squishable)
     }
-
+    
 }
 
-struct ButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            ButtonView(
-                title: String.addToList,
-                backgroundColor: .gray.opacity(0.4),
-                foregroundColor: .black
-            ) {
-                print("Tapping add to List !!!")
-            }
-            ButtonView(
-                title: String.addToCart,
-                backgroundColor: .accentColor,
-                foregroundColor: .white
-            ) {
-                print("Tapping add to Cart !!!")
-            }
-        }
-        .previewLayout(.sizeThatFits)
-        .previewInterfaceOrientation(.landscapeLeft)
-
+#Preview(traits: .sizeThatFitsLayout,.landscapeLeft) {
+    ButtonView(title: String.addToList, backgroundColor: .gray.opacity(0.4), foregroundColor: .black, action: {
+        print("Tapping Add to List !!!")
+    } )
+    
+    ButtonView(
+        title: String.addToCart,
+        backgroundColor: .accentColor,
+        foregroundColor: .white
+    ) {
+        print("Tapping add to Cart !!!")
     }
 }
+

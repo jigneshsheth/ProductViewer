@@ -19,14 +19,14 @@ struct MultilineTextView: View {
 					.fontWeight(.medium)
 					.lineLimit(nil)
 			}.frame(maxWidth: .infinity)
-		}.padding([.leading,.trailing],3.0)
+		}
+        .padding([.leading,.trailing],3.0)
+        .accessibilityIdentifier(AccessibilityID.productDetailDescription)
 	}
 }
 
-struct MultilineTextView_Previews: PreviewProvider {
-	static var previews: some View {
-		MultilineTextView(multiLineText: "This is long description...Line 1: This is long description... \n Line 2: This is long description... \nLine 3: This is long description...")
-			.previewLayout(.sizeThatFits)
-		
-	}
+#Preview(traits: .sizeThatFitsLayout) {
+    MultilineTextView(multiLineText: "This is long description...Line 1: This is long description... \n Line 2: This is long description... \nLine 3: This is long description...")
+        .frame(height: 300)
 }
+

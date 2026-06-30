@@ -11,7 +11,7 @@ import SwiftUI
 struct ProductViewerApp: App {
 	var body: some Scene {
 		WindowGroup {
-			ProductListView()
+			ProductListView(viewModel: AppDependencies.makeProductViewModel())
 		}
 	}
 }

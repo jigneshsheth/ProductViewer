@@ -14,7 +14,7 @@ protocol ProductCloudService {
 
 //MARK: - ProductService Errors
 
-enum ProductServiceError: Error {
+enum ProductCloudServiceError: Error {
     case invalidUrl
     case invalidUrlRequest
     case dataParsingError
@@ -24,7 +24,7 @@ enum ProductServiceError: Error {
 }
 
 // Localized error for Product Service
-extension ProductServiceError: LocalizedError {
+extension ProductCloudServiceError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidUrl:
@@ -62,26 +62,26 @@ extension ProductServiceError: LocalizedError {
 
 //MARK: - Service Implementation
 
-final class ProductServiceImpl: ProductCloudService {
+final class ProductCloudServiceImpl: ProductCloudService {
 
     /// Fetch Product
     /// - Returns: list of products in array
     func fetchProducts() async throws -> [Product] {
         guard let request = try buildURLRequest(from: APIConstants.dealsApiUrl)
         else {
-            throw ProductServiceError.invalidUrlRequest
+            throw ProductCloudServiceError.invalidUrlRequest
         }
 
         let (data, response) = try await URLSession.shared.data(for: request)
         guard let res = (response as? HTTPURLResponse) else {
-            throw ProductServiceError.other
+            throw ProductCloudServiceError.other
         }
 
         switch res.statusCode {
         case 400..<500:
-            throw ProductServiceError.requestError
+            throw ProductCloudServiceError.requestError
         case 500..<600:
-            throw ProductServiceError.internalServerError
+            throw ProductCloudServiceError.internalServerError
         default:
             print("Successful Request")
         }
@@ -99,7 +99,7 @@ final class ProductServiceImpl: ProductCloudService {
     /// - Returns: Optional URL request
     private func buildURLRequest(from urlString: String) throws -> URLRequest? {
         guard let url = URL(string: urlString) else {
-            throw ProductServiceError.invalidUrl
+            throw ProductCloudServiceError.invalidUrl
         }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

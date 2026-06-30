@@ -95,6 +95,7 @@ struct Product: Codable, Identifiable, Equatable {
     }
 }
 
+// Product is concrete Type
 extension Product {
     var onSale: Bool {
         guard self.salePrice != nil else {
@@ -111,6 +112,8 @@ extension Product {
         sortableComparisonKey > other.sortableComparisonKey
     }
 }
+
+
 
 extension Product {
 

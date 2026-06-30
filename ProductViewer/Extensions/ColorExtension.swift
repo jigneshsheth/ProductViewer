@@ -9,9 +9,10 @@ import Foundation
 import SwiftUI
 
 extension Color {
-
+    
+    // You can do this because color is a concrete type. It's not a protocol.
     static let lightBlack = Color.black.opacity(0.6)
-
+    
     /// Random Color
     static var random: Color {
         return Color(

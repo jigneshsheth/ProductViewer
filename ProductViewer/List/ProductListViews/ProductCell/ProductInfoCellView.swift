@@ -21,6 +21,7 @@ struct ProductInfoCellView: View {
 				.lineLimit(2)
 				.foregroundColor(.primary)
 				.padding([.trailing,.leading],5)
+                .accessibilityIdentifier(AccessibilityID.productTitle(id: product.id))
 			Spacer()
 			Divider()
 			HStack{
@@ -55,11 +56,8 @@ struct ProductInfoCellView: View {
 	}
 }
 
-struct ProductInfoCellView_Previews: PreviewProvider {
-	
-	static var previews: some View {
-		ProductInfoCellView(product:Product.dummyProducts.first!)
-			.frame( height:120)
-			.previewLayout(.sizeThatFits)
-	}
+#Preview(traits: .sizeThatFitsLayout) {
+    ProductInfoCellView(product:Product.dummyProducts.first!)
+        .frame( height:120)
 }
+

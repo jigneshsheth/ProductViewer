@@ -10,9 +10,9 @@ import XCTest
 
 class ProductServiceTests: XCTestCase {
 	
-	private var productService:ProductService!
+	private var productService:ProductCloudService!
 	override func setUpWithError() throws {
-		productService = ProductServiceImpl()
+		productService = ProductCloudServiceImpl()
 	}
 	
 	override func tearDownWithError() throws {

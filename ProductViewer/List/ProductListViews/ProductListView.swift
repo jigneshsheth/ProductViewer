@@ -9,17 +9,16 @@ import SwiftUI
 
 /// List of Products screen
 struct ProductListView: View {
-    @StateObject
-    private var productViewModel = ProductViewModelImpl(
-        productRepository: ProductRepositoryImpl(
-            remoteService: ProductServiceImpl(),
-            localStore: ProductJSONLocalStore()
-        )
-    )
+
+    @State private var productViewModel: ProductViewModelImpl
+
+    init(viewModel: ProductViewModelImpl) {
+        _productViewModel = State(initialValue: viewModel)
+    }
 
     @State private var presentAlert = false
     @State private var alertTitle = String.emptyString
-
+    
     var body: some View {
         NavigationView {
             Group {
@@ -29,6 +28,7 @@ struct ProductListView: View {
                     List(productViewModel.productList) { product in
                         ProductCellViewWithNavigation(product: product)
                     }
+                    .accessibilityIdentifier(AccessibilityID.productList)
                     .listStyle(.plain)
                     .navigationTitle(String.deals)
                     .navigationBarTitleDisplayMode(.inline)
@@ -53,9 +53,9 @@ struct ProductListView: View {
                 Text(alertTitle)
             }
         }
-
+        
     }
-
+    
     /// Loading Product data
     private func loadProductData() async {
         await self.productViewModel.loadProducts()
@@ -64,7 +64,7 @@ struct ProductListView: View {
             presentAlert = true
         }
     }
-
+    
     private func refreshProductData() async {
         await self.productViewModel.refreshProducts()
         if let errorMessage = productViewModel.lastErrorMessage {
@@ -72,12 +72,9 @@ struct ProductListView: View {
             presentAlert = true
         }
     }
-
+    
 }
 
-
-struct ProductListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProductListView()
-    }
+#Preview {
+    ProductListView(viewModel: AppDependencies.makeProductViewModel())
 }

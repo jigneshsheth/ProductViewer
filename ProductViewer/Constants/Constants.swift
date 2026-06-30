@@ -7,6 +7,7 @@
 
 import Foundation
 
+// String is a concrete type, so it's extension can have static let properties.
 extension String {
 
     //  MARK: Product List screen
