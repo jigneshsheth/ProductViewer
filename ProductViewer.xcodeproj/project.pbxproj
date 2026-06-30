@@ -303,7 +303,6 @@
 			children = (
 				19EF2E1727A294C1003B0A34 /* Assets.xcassets */,
 				A1B2C3D12FF30001006EB257 /* AppDependencies.swift */,
-				C3D4E5F42FF50003006EB257 /* AppLogger.swift */,
 				B2C3D4E82FF40005006EB257 /* UITesting */,
 				19EF2E1327A294BE003B0A34 /* ProductViewerApp.swift */,
 			);
@@ -323,6 +322,7 @@
 		19EF2E4027A29533003B0A34 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				C3D4E5F42FF50003006EB257 /* AppLogger.swift */,
 				B2C3D4E02FF40001006EB257 /* AccessibilityID.swift */,
 				194BC2A827A2974300C3FE20 /* APIConstants.swift */,
 				194BC2E227A3D0D900C3FE20 /* Constants.swift */,
