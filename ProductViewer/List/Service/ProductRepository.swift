@@ -8,12 +8,12 @@
 import Foundation
 
 protocol ProductRepository {
-    func loadProducts() async throws-> [Product]
-    func refreshProducts() async -> Bool
+    func loadProducts() async throws -> [Product]
+    func refreshProducts() async -> RefreshOutcome
 }
 
 final class ProductRepositoryImpl: ProductRepository {
-    
+
     private let remoteService: ProductCloudService
     private let localStore: ProductLocalStore
 
@@ -27,32 +27,45 @@ final class ProductRepositoryImpl: ProductRepository {
             let cached = try localStore.loadProducts()
             return deduplicated(cached)
         } catch {
-            print("Repository cache load failed: \(error.localizedDescription)")
+            AppLogger.repository.error("Cache load failed: \(error.localizedDescription, privacy: .public)")
             throw ProductLocalStoreError.readError
-//            return []
         }
     }
 
-    func refreshProducts() async -> Bool {
+    func refreshProducts() async -> RefreshOutcome {
+        let localProducts: [Product]
         do {
-            let localProducts = try localStore.loadProducts()
-            let remoteProducts = try await remoteService.fetchProducts()
-            let merged = merge(localProducts: localProducts, remoteProducts: remoteProducts)
-            let current = deduplicated(localProducts)
-            if merged != current {
-                try localStore.saveProducts(merged)
-                print("Repository refresh: cache updated with remote changes")
-                return true
-            }
-            print("Repository refresh: no cache change needed")
-            return false
+            localProducts = try localStore.loadProducts()
         } catch {
-            print("Repository remote refresh failed: \(error.localizedDescription)")
-            return false
+            AppLogger.repository.error("Refresh local read failed: \(error.localizedDescription, privacy: .public)")
+            return .failed(.localStoreReadFailed)
+        }
+
+        let remoteProducts: [Product]
+        do {
+            remoteProducts = try await remoteService.fetchProducts()
+        } catch {
+            AppLogger.repository.error("Refresh remote fetch failed: \(error.localizedDescription, privacy: .public)")
+            return .failed(.remoteFetchFailed)
+        }
+
+        let merged = merge(localProducts: localProducts, remoteProducts: remoteProducts)
+        let current = deduplicated(localProducts)
+        guard merged != current else {
+            AppLogger.repository.debug("Refresh completed with no cache changes")
+            return .unchanged
+        }
+
+        do {
+            try localStore.saveProducts(merged)
+            AppLogger.repository.info("Refresh updated cache with remote changes")
+            return .updated
+        } catch {
+            AppLogger.repository.error("Refresh cache write failed: \(error.localizedDescription, privacy: .public)")
+            return .failed(.localStoreWriteFailed)
         }
     }
 
- 
     private func deduplicated(_ products: [Product]) -> [Product] {
         let merged = merge(localProducts: [], remoteProducts: products)
         return merged.sorted(by: { $0.id < $1.id })

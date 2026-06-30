@@ -39,16 +39,13 @@ struct ButtonView: View {
 }
 
 #Preview(traits: .sizeThatFitsLayout,.landscapeLeft) {
-    ButtonView(title: String.addToList, backgroundColor: .gray.opacity(0.4), foregroundColor: .black, action: {
-        print("Tapping Add to List !!!")
-    } )
-    
+    ButtonView(title: String.addToList, backgroundColor: .gray.opacity(0.4), foregroundColor: .black, action: {})
+
     ButtonView(
         title: String.addToCart,
         backgroundColor: .accentColor,
-        foregroundColor: .white
-    ) {
-        print("Tapping add to Cart !!!")
-    }
+        foregroundColor: .white,
+        action: {}
+    )
 }
 

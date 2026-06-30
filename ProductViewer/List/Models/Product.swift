@@ -83,7 +83,7 @@ struct Product: Codable, Identifiable, Equatable {
                 ?? fallbackIso8601Formatter.date(from: dateString) {
                 return parsed
             }
-            print("Product decode warning: invalid updated_at format '\(dateString)'; defaulting to distantPast")
+            AppLogger.product.warning("Invalid updated_at format '\(dateString, privacy: .public)'; defaulting to distantPast")
             return .distantPast
         }
 

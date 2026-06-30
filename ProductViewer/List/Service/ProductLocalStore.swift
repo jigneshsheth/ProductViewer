@@ -36,10 +36,9 @@ final class ProductJSONLocalStore: ProductLocalStore {
 
         do {
             let data = try Data(contentsOf: cacheURL)
-//            decoder.keyDecodingStrategy = .convertFromSnakeCase
             return try decoder.decode([Product].self, from: data)
         } catch {
-            print("Product cache read error: \(error.localizedDescription)")
+            AppLogger.localStore.error("Product cache read error: \(error.localizedDescription, privacy: .public)")
             throw ProductLocalStoreError.readError
         }
     }
@@ -49,7 +48,7 @@ final class ProductJSONLocalStore: ProductLocalStore {
             let data = try encoder.encode(products)
             try data.write(to: cacheURL, options: [.atomic])
         } catch {
-            print("Product cache write error: \(error.localizedDescription)")
+            AppLogger.localStore.error("Product cache write error: \(error.localizedDescription, privacy: .public)")
             throw ProductLocalStoreError.writeError
         }
     }

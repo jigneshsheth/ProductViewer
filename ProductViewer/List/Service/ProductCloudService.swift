@@ -83,7 +83,7 @@ final class ProductCloudServiceImpl: ProductCloudService {
         case 500..<600:
             throw ProductCloudServiceError.internalServerError
         default:
-            print("Successful Request")
+            AppLogger.cloudService.debug("Product fetch request succeeded")
         }
 
         do {
@@ -103,7 +103,6 @@ final class ProductCloudServiceImpl: ProductCloudService {
         }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        // set any custom header values for request
         return request
     }
 

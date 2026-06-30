@@ -27,5 +27,11 @@ extension String {
     //  MARK: Product Detail view
     static let addToCart = "add to cart"
     static let addToList = "add to list"
+}
 
+enum UserMessages {
+    static let loadFailedNoCache = "Unable to load products right now. Check your connection and try again."
+    static let refreshFailedWithCache = "Unable to refresh products right now. Showing cached products."
+    static let cacheReloadFailed = "Failed to reload products from cache."
+    static let cacheLoadFailed = "Failed to load products from cache."
 }

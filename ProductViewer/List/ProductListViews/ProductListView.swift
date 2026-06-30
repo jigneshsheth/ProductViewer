@@ -22,10 +22,10 @@ struct ProductListView: View {
     var body: some View {
         NavigationView {
             Group {
-                if productViewModel.productList.isEmpty && !presentAlert {
+                if productViewModel.state.products.isEmpty && !presentAlert {
                     LoadingView(text: String.loadingProduct)
                 } else {
-                    List(productViewModel.productList) { product in
+                    List(productViewModel.state.products) { product in
                         ProductCellViewWithNavigation(product: product)
                     }
                     .accessibilityIdentifier(AccessibilityID.productList)
@@ -59,7 +59,7 @@ struct ProductListView: View {
     /// Loading Product data
     private func loadProductData() async {
         await self.productViewModel.loadProducts()
-        if let errorMessage = productViewModel.lastErrorMessage {
+        if let errorMessage = productViewModel.state.errorMessage {
             alertTitle = errorMessage
             presentAlert = true
         }
@@ -67,7 +67,7 @@ struct ProductListView: View {
     
     private func refreshProductData() async {
         await self.productViewModel.refreshProducts()
-        if let errorMessage = productViewModel.lastErrorMessage {
+        if let errorMessage = productViewModel.state.errorMessage {
             alertTitle = errorMessage
             presentAlert = true
         }

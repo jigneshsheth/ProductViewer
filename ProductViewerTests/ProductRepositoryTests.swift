@@ -60,9 +60,9 @@ final class ProductRepositoryTests: XCTestCase {
         )
         cloudService.productsToReturn = [olderRemote, newerRemote, ProductTestFixtures.product(id: 2)]
 
-        let didChange = await repository.refreshProducts()
+        let outcome = await repository.refreshProducts()
 
-        XCTAssertTrue(didChange)
+        XCTAssertEqual(outcome, .updated)
         XCTAssertEqual(localStore.storedProducts.count, 2)
         XCTAssertEqual(localStore.storedProducts.first(where: { $0.id == 1 })?.title, "Remote Newer")
     }
@@ -81,9 +81,9 @@ final class ProductRepositoryTests: XCTestCase {
         localStore.storedProducts = [olderLocal]
         cloudService.productsToReturn = [newerRemote]
 
-        let didChange = await repository.refreshProducts()
+        let outcome = await repository.refreshProducts()
 
-        XCTAssertTrue(didChange)
+        XCTAssertEqual(outcome, .updated)
         XCTAssertEqual(localStore.storedProducts.first?.title, "Remote")
     }
 
@@ -101,10 +101,18 @@ final class ProductRepositoryTests: XCTestCase {
         localStore.storedProducts = [newerLocal]
         cloudService.productsToReturn = [olderRemote]
 
-        let didChange = await repository.refreshProducts()
+        let outcome = await repository.refreshProducts()
 
-        XCTAssertFalse(didChange)
+        XCTAssertEqual(outcome, .unchanged)
         XCTAssertEqual(localStore.storedProducts.first?.title, "Local")
         XCTAssertEqual(localStore.saveCallCount, 0)
+    }
+
+    func testRefreshProductsReturnsRemoteFetchFailure() async {
+        cloudService.errorToThrow = ProductCloudServiceError.requestError
+
+        let outcome = await repository.refreshProducts()
+
+        XCTAssertEqual(outcome, .failed(.remoteFetchFailed))
     }
 }

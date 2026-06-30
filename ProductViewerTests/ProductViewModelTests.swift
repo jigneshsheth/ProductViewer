@@ -47,27 +47,38 @@ final class ProductViewModelTests: XCTestCase {
 
         let loadTask = Task { await viewModel.loadProducts() }
 
-        await waitUntil { !self.viewModel.productList.isEmpty }
+        await waitUntil { !self.viewModel.state.products.isEmpty }
 
-        XCTAssertEqual(viewModel.productList.map(\.title), ["Cached"])
+        XCTAssertEqual(viewModel.state.products.map(\.title), ["Cached"])
 
         cloudService.resumeFetch()
         await loadTask.value
 
-        XCTAssertEqual(viewModel.productList.map(\.title), ["Updated"])
-        XCTAssertNil(viewModel.lastErrorMessage)
+        XCTAssertEqual(viewModel.state.products.map(\.title), ["Updated"])
+        XCTAssertNil(viewModel.state.errorMessage)
     }
 
-    func testLoadProductsWithEmptyCacheAndFailedRefreshSetsErrorMessage() async {
+    func testLoadProductsWithEmptyCacheAndFailedRefreshSetsLoadFailedMessage() async {
         cloudService.errorToThrow = ProductCloudServiceError.requestError
 
         await viewModel.loadProducts()
 
-        XCTAssertTrue(viewModel.productList.isEmpty)
-        XCTAssertEqual(
-            viewModel.lastErrorMessage,
-            "Unable to refresh products right now. Showing cached data when available."
-        )
+        XCTAssertTrue(viewModel.state.products.isEmpty)
+        XCTAssertEqual(viewModel.state.errorMessage, UserMessages.loadFailedNoCache)
+    }
+
+    func testRefreshProductsWithCachedDataAndFailedRemoteSetsRefreshFailedMessage() async {
+        let cachedProduct = ProductTestFixtures.product(id: 1, title: "Cached")
+        localStore.storedProducts = [cachedProduct]
+        cloudService.productsToReturn = [cachedProduct]
+
+        await viewModel.loadProducts()
+        cloudService.errorToThrow = ProductCloudServiceError.requestError
+
+        await viewModel.refreshProducts()
+
+        XCTAssertEqual(viewModel.state.products.map(\.title), ["Cached"])
+        XCTAssertEqual(viewModel.state.errorMessage, UserMessages.refreshFailedWithCache)
     }
 
     private func waitUntil(

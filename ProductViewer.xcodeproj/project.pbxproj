@@ -42,6 +42,9 @@
 		B2C3D4E32FF40002006EB257 /* ProductUITestFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E22FF40002006EB257 /* ProductUITestFixtures.swift */; };
 		B2C3D4E52FF40003006EB257 /* UITestProductCloudService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E42FF40003006EB257 /* UITestProductCloudService.swift */; };
 		B2C3D4E72FF40004006EB257 /* UITestProductLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C3D4E62FF40004006EB257 /* UITestProductLocalStore.swift */; };
+		C3D4E5F12FF50001006EB257 /* RefreshOutcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D4E5F02FF50001006EB257 /* RefreshOutcome.swift */; };
+		C3D4E5F32FF50002006EB257 /* ProductListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D4E5F22FF50002006EB257 /* ProductListState.swift */; };
+		C3D4E5F52FF50003006EB257 /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D4E5F42FF50003006EB257 /* AppLogger.swift */; };
 		19EF2E2F27A294C2003B0A34 /* ProductViewerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF2E2E27A294C2003B0A34 /* ProductViewerUITests.swift */; };
 		19EF2E3127A294C2003B0A34 /* ProductViewerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EF2E3027A294C2003B0A34 /* ProductViewerUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
@@ -101,6 +104,9 @@
 		B2C3D4E22FF40002006EB257 /* ProductUITestFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductUITestFixtures.swift; sourceTree = "<group>"; };
 		B2C3D4E42FF40003006EB257 /* UITestProductCloudService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestProductCloudService.swift; sourceTree = "<group>"; };
 		B2C3D4E62FF40004006EB257 /* UITestProductLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestProductLocalStore.swift; sourceTree = "<group>"; };
+		C3D4E5F02FF50001006EB257 /* RefreshOutcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshOutcome.swift; sourceTree = "<group>"; };
+		C3D4E5F22FF50002006EB257 /* ProductListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListState.swift; sourceTree = "<group>"; };
+		C3D4E5F42FF50003006EB257 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
 		19EF2E2A27A294C2003B0A34 /* ProductViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProductViewerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		19EF2E2E27A294C2003B0A34 /* ProductViewerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewerUITests.swift; sourceTree = "<group>"; };
 		19EF2E3027A294C2003B0A34 /* ProductViewerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewerUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -135,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				19D5BC442FF2C53E006EB257 /* ProductRepository.swift */,
+				C3D4E5F02FF50001006EB257 /* RefreshOutcome.swift */,
 				19D5BC422FF2C438006EB257 /* ProductLocalStore.swift */,
 				194BC2B827A2996200C3FE20 /* ProductCloudService.swift */,
 			);
@@ -155,6 +162,7 @@
 		194BC2B527A298EE00C3FE20 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				C3D4E5F22FF50002006EB257 /* ProductListState.swift */,
 				194BC2D027A33CA200C3FE20 /* ProductViewModel.swift */,
 			);
 			path = ViewModel;
@@ -295,6 +303,7 @@
 			children = (
 				19EF2E1727A294C1003B0A34 /* Assets.xcassets */,
 				A1B2C3D12FF30001006EB257 /* AppDependencies.swift */,
+				C3D4E5F42FF50003006EB257 /* AppLogger.swift */,
 				B2C3D4E82FF40005006EB257 /* UITesting */,
 				19EF2E1327A294BE003B0A34 /* ProductViewerApp.swift */,
 			);
@@ -450,10 +459,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3D4E5F32FF50002006EB257 /* ProductListState.swift in Sources */,
 				194BC2D127A33CA200C3FE20 /* ProductViewModel.swift in Sources */,
 				194BC2C927A33C6600C3FE20 /* ProductDetailView.swift in Sources */,
 				19D5BC402FF2BB16006EB257 /* ProductImageView.swift in Sources */,
 				194BC2CF27A33C7200C3FE20 /* ProductInfoCellView.swift in Sources */,
+				C3D4E5F12FF50001006EB257 /* RefreshOutcome.swift in Sources */,
 				19D5BC452FF2C540006EB257 /* ProductRepository.swift in Sources */,
 				194BC2DB27A33D2500C3FE20 /* LoadingView.swift in Sources */,
 				194BC2DA27A33D2500C3FE20 /* SquishableButtonStyle.swift in Sources */,
@@ -465,6 +476,7 @@
 				B2C3D4E32FF40002006EB257 /* ProductUITestFixtures.swift in Sources */,
 				B2C3D4E52FF40003006EB257 /* UITestProductCloudService.swift in Sources */,
 				B2C3D4E72FF40004006EB257 /* UITestProductLocalStore.swift in Sources */,
+				C3D4E5F52FF50003006EB257 /* AppLogger.swift in Sources */,
 				A1B2C3D22FF30001006EB257 /* AppDependencies.swift in Sources */,
 				19EF2E1427A294BE003B0A34 /* ProductViewerApp.swift in Sources */,
 				194BC2CE27A33C7200C3FE20 /* ProductCellViewWithNavigation.swift in Sources */,
